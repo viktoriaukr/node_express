@@ -77,7 +77,7 @@ function authUser(req, res, next) {
 function requireAdminOrUser(req, res, next) {
   try {
     // Check if the user is an admin or the correct user
-    if (!(req.curr_admin || req.curr_username === req.params.username)) {
+    if (!req.curr_admin && req.curr_username !== req.params.username) {
       return next({ status: 401, message: "Unauthorized" });
     } else {
       return next();
